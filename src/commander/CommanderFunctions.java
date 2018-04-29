@@ -469,8 +469,16 @@ public class CommanderFunctions {
 
     private static void RobotExecApp(String AppExec){
         int commIndex = Arrays.asList(commNamesByApps).indexOf(AppExec);
-        String test = commAppsPath[commIndex];
+        String AppPath = commAppsPath[commIndex];
 
+        Runtime rs = Runtime.getRuntime();
+
+        try{
+            rs.exec(AppPath);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }
