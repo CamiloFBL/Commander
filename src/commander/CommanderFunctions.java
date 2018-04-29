@@ -12,17 +12,17 @@ public class CommanderFunctions {
 
     public static String commInit = new String();
     public static String commExit = "exit";
-    public static String[] commNamesByKeyPress = new String[]{"whome", "taskmgr"};
-    private static String[] commKeyPress = new String[]{"windows", "ctrl+shift+esc"};
-    public static String[] commNamesByApps = new String[]{null};
-    public static String[] commAppsPath = new String[]{null};
+    public static String[] commNamesByKeyPress/* = new String[]{"whome", "taskmgr"}*/;
+    public static String[] commKeyPress/* = new String[]{"windows", "ctrl+shift+esc"}*/;
+    public static String[] commNamesByApps/* = new String[]{null}*/;
+    public static String[] commAppsPath/* = new String[]{null}*/;
 
-    public static void InitCheck(){
+    public static void InitCheck() throws IOException {
         CheckComms();
         CheckPropFile();
     }
 
-    public static void CheckComms() {
+    public static void CheckComms() throws IOException {
 
         File txtCommNamesByKeyPress = new File("./CommNamesByKeyPress.txt");
         File txtCommKeyPress = new File("./CommKeyPress.txt");
@@ -30,9 +30,32 @@ public class CommanderFunctions {
         File txtCommAppsPath = new File("./CommAppsPath.txt");
 
         if(txtCommNamesByKeyPress.exists() && txtCommKeyPress.exists()){
-            System.out.println("Commands by key press files found...");
-            ReadCommKeyPress();
-            ReadCommNamesByKeyPress();
+            int linesCount1 = 0;
+            FileReader fr = new FileReader(txtCommNamesByKeyPress);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (br.readLine() != null) {
+                linesCount1++;
+            }
+
+            int linesCount2 = 0;
+            FileReader fr2 = new FileReader(txtCommKeyPress);
+            BufferedReader br2 = new BufferedReader(fr2);
+
+            while (br2.readLine() != null) {
+                linesCount2++;
+            }
+
+            if(linesCount1 == linesCount2){
+                System.out.println("Commands by key press files found...");
+                ReadCommKeyPress();
+                ReadCommNamesByKeyPress();
+            }
+            else{
+                System.out.println("Commands by key press files pair don't match, creating files...");
+                CreateCommKeyPress();
+                CreateCommNamesByKeyPress();
+            }
         }
         else{
             System.out.println("Commands by key press files pair not found, creating files...");
@@ -40,10 +63,34 @@ public class CommanderFunctions {
             CreateCommNamesByKeyPress();
         }
 
+
         if(txtCommNamesByApps.exists() && txtCommAppsPath.exists()){
-            System.out.println("Commands for apps execution files found...");
-            ReadCommAppsPath();
-            ReadCommNamesByApps();
+            int linesCount1 = 0;
+            FileReader fr = new FileReader(txtCommNamesByApps);
+            BufferedReader br = new BufferedReader(fr);
+
+            while (br.readLine() != null) {
+                linesCount1++;
+            }
+
+            int linesCount2 = 0;
+            FileReader fr2 = new FileReader(txtCommAppsPath);
+            BufferedReader br2 = new BufferedReader(fr2);
+
+            while (br2.readLine() != null) {
+                linesCount2++;
+            }
+
+            if(linesCount1 == linesCount2){
+                System.out.println("Commands for apps execution files found...");
+                ReadCommAppsPath();
+                ReadCommNamesByApps();
+            }
+            else{
+                System.out.println("Commands for apps execution files pair don't match, creating files...");
+                CreateCommAppsPath();
+                CreateCommNamesByApps();
+            }
         }
         else{
             System.out.println("Commands for apps execution files pair not found, creating files...");
@@ -55,13 +102,16 @@ public class CommanderFunctions {
     public static void CreateCommNamesByKeyPress() {
         String[] commNames = new String[]{"whome", "taskmgr"};
         File file = new File("CommNamesByKeyPress.txt");
+        commNamesByKeyPress = new String[commNames.length];
         try {
             PrintWriter pw = new PrintWriter(file);
             for(int i = 0; commNames.length > i; i++){
                 System.out.println(commNames[i]);
                 pw.println(commNames[i]);
+                commNamesByKeyPress[i] = commNames[i];
             }
             pw.close();
+            System.out.println("CommNamesByKeyPress file generated.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,6 +132,7 @@ public class CommanderFunctions {
 
             commNames = new String[linesCount];
             System.out.println(commNames.length);
+            commNamesByKeyPress = new String[linesCount];
 
             fr = new FileReader("CommNamesByKeyPress.txt");
             br = new BufferedReader(fr);
@@ -89,6 +140,7 @@ public class CommanderFunctions {
             for(int i = 0; (line = br.readLine()) != null; i++) {
                 commNames[i] = line;
                 System.out.println(line);
+                commNamesByKeyPress[i] = line;
             }
 
             fr.close();
@@ -103,13 +155,16 @@ public class CommanderFunctions {
     public static void CreateCommKeyPress(){
         String[] commKeys = new String[]{"windows", "ctrl+shift+esc"};
         File file = new File("CommKeyPress.txt");
+        commKeyPress = new String[commKeys.length];
         try {
             PrintWriter pw = new PrintWriter(file);
             for(int i = 0; commKeys.length > i; i++){
                 System.out.println(commKeys[i]);
                 pw.println(commKeys[i]);
+                commKeyPress[i] = commKeys[i];
             }
             pw.close();
+            System.out.println("CommKeyPress file generated.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -130,6 +185,7 @@ public class CommanderFunctions {
 
             commKeys = new String[linesCount];
             System.out.println(commKeys.length);
+            commKeyPress = new String[linesCount];
 
             fr = new FileReader("CommKeyPress.txt");
             br = new BufferedReader(fr);
@@ -137,6 +193,7 @@ public class CommanderFunctions {
             for(int i = 0; (line = br.readLine()) != null; i++) {
                 commKeys[i] = line;
                 System.out.println(line);
+                commKeyPress[i] = line;
             }
 
             fr.close();
@@ -149,15 +206,18 @@ public class CommanderFunctions {
     }
 
     public static void CreateCommNamesByApps() {
-        String[] commNames = new String[]{null};
+        String[] commNames = new String[]{"null"};
         File file = new File("CommNamesByApps.txt");
+        commNamesByApps = new String[commNames.length];
         try {
             PrintWriter pw = new PrintWriter(file);
             for(int i = 0; commNames.length > i; i++){
                 System.out.println(commNames[i]);
                 pw.println(commNames[i]);
+                commNamesByApps[i] = commNames[i];
             }
             pw.close();
+            System.out.println("CommNamesByApps file generated.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -178,6 +238,7 @@ public class CommanderFunctions {
 
             commNames = new String[linesCount];
             System.out.println(commNames.length);
+            commNamesByApps = new String[linesCount];
 
             fr = new FileReader("CommNamesByApps.txt");
             br = new BufferedReader(fr);
@@ -185,6 +246,7 @@ public class CommanderFunctions {
             for(int i = 0; (line = br.readLine()) != null; i++) {
                 commNames[i] = line;
                 System.out.println(line);
+                commNamesByApps[i] = line;
             }
 
             fr.close();
@@ -197,15 +259,18 @@ public class CommanderFunctions {
     }
 
     public static void CreateCommAppsPath(){
-        String[] commKeys = new String[]{null};
+        String[] commPaths = new String[]{"null"};
         File file = new File("CommAppsPath.txt");
+        commAppsPath = new String[commPaths.length];
         try {
             PrintWriter pw = new PrintWriter(file);
-            for(int i = 0; commKeys.length > i; i++){
-                System.out.println(commKeys[i]);
-                pw.println(commKeys[i]);
+            for(int i = 0; commPaths.length > i; i++){
+                System.out.println(commPaths[i]);
+                pw.println(commPaths[i]);
+                commAppsPath[i] = commPaths[i];
             }
             pw.close();
+            System.out.println("CommAppsPath file generated.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -226,6 +291,7 @@ public class CommanderFunctions {
 
             commKeys = new String[linesCount];
             System.out.println(commKeys.length);
+            commAppsPath = new String[linesCount];
 
             fr = new FileReader("CommAppsPath.txt");
             br = new BufferedReader(fr);
@@ -233,6 +299,7 @@ public class CommanderFunctions {
             for(int i = 0; (line = br.readLine()) != null; i++) {
                 commKeys[i] = line;
                 System.out.println(line);
+                commAppsPath[i] = line;
             }
 
             fr.close();
@@ -244,7 +311,7 @@ public class CommanderFunctions {
         }
     }
 
-    public static void CheckPropFile() {
+    public static void CheckPropFile(){
 
         File prop = new File("./commander.properties");
 
