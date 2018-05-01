@@ -6,12 +6,18 @@ import javafx.fxml.FXML;
 //import java.awt.*;
 //import java.awt.event.ActionEvent;
 import javafx.event.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
-public class Controller{
+public class MainController {
 
     @FXML
     private TextField command;
@@ -75,6 +81,19 @@ public class Controller{
                 log.appendText("Unrecognized command\n");
             }
         }
+    }
+
+    @FXML
+    public void OpenSettings() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("SettingsWindow.fxml"));
+        //FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("SettingsWindow.fxml"));
+        //Parent root1 = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+        //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        stage.setTitle("Settings");
+        stage.setScene(new Scene(root, 600, 400));
     }
 
 }
