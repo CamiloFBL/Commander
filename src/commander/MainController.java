@@ -86,14 +86,10 @@ public class MainController {
     @FXML
     public void OpenSettings() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("SettingsWindow.fxml"));
-        //FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("SettingsWindow.fxml"));
-        //Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
-        //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         stage.setTitle("Settings");
         stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 
 }
