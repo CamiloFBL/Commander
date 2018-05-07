@@ -20,11 +20,9 @@ import java.io.IOException;
 public class MainController {
 
     @FXML
-    private TextField command;
-
-    @FXML
     public TextArea log;
-
+    @FXML
+    private TextField command;
     @FXML
     private Button SubmitButton;
 
@@ -83,13 +81,12 @@ public class MainController {
         }
     }
 
-    @FXML
     public void OpenSettings() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("SettingsWindow.fxml"));
+        Parent root1 = FXMLLoader.load(getClass().getResource("SettingsWindow.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Settings");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
+        stage.setScene(new Scene(root1, 600, 400));
+        stage.showAndWait();
     }
 
 }

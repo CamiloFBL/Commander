@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="commander.SettingsController"-->
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -10,44 +12,82 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<!-- prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="commander.SettingsController"-->
-
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="commander.SettingsController">
-   <top>
-      <Label text="*Before closing this window, make sure to save changes by pressing &quot;Apply&quot; button." BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin></Label>
-   </top>
-   <center>
-      <GridPane BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="CommInit Symbol: " />
-            <TextField GridPane.columnIndex="1" />
-             <Label text="Commands by Key Press" GridPane.rowIndex="1" />
-            <ListView id="ListCommNamesByKeyPress" fx:id="ListCommNamesByKeyPress" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
-            <ListView id="ListCommKeyPress" fx:id="ListCommKeyPress" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Commands to open apps" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ListView id="ListCommNamesByApps" fx:id="ListCommNamesByApps" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <ListView id="ListCommAppsPath" fx:id="ListCommAppsPath" editable="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" text="Button" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </BorderPane.margin>
-      </GridPane>
-   </center>
+    <top>
+        <Label text="Before closing this window, make sure to save changes by pressing &quot;Apply&quot; button." BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
+    <center>
+        <GridPane BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints />
+            </rowConstraints>
+            <children>
+                <Label text="CommInit Symbol: " />
+                <TextField id="commInitField" fx:id="commInitField" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </TextField>
+                <Label text="Press &quot;ENTER&quot; on edited item to save changes." GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
+                    <GridPane.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                    </GridPane.margin>
+                </Label>
+                <Label text="Commands by Key Press:" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </GridPane.margin></Label>
+            <Label text="Command Names" GridPane.rowIndex="2" />
+            <Label text="Key Presses" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ListView id="ListCommNamesByKeyPress" fx:id="ListCommNamesByKeyPress" editable="true" onMouseClicked="#SelectKeyNameCommPair" prefWidth="200.0" GridPane.rowIndex="3" />
+                <ListView id="ListCommKeyPress" fx:id="ListCommKeyPress" editable="true" onMouseClicked="#SelectKeyCommPair" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Commands to open apps:" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></Label>
+            <Label text="Command Name" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label text="App path or command" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                <ListView id="ListCommNamesByApps" fx:id="ListCommNamesByApps" editable="true" onMouseClicked="#SelectAppNamePair" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <ListView id="ListCommAppsPath" fx:id="ListCommAppsPath" editable="true" onMouseClicked="#SelectAppPair" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                <Button id="addKeyPress" fx:id="addKeyPress" mnemonicParsing="false" onAction="#AddNewKeyComm" text="Add" GridPane.rowIndex="4" />
+                <Button id="deleteKeyPress" fx:id="deleteKeyPress" mnemonicParsing="false" onAction="#DeleteKeyComm" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Button id="addApp" fx:id="addApp" mnemonicParsing="false" onAction="#AddNewAppComm" text="Add" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                <Button id="deleteApp" fx:id="deleteApp" mnemonicParsing="false" onAction="#DeleteAppComm" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                    <GridPane.margin>
+                        <Insets top="10.0" />
+                    </GridPane.margin>
+                    <left>
+                        <Button fx:id="apply" alignment="CENTER" mnemonicParsing="false" onAction="#SaveCommChanges" text="Apply" BorderPane.alignment="CENTER" />
+                    </left>
+                    <right>
+                        <Button fx:id="close" mnemonicParsing="false" onAction="#StageClose" text="Close" BorderPane.alignment="CENTER" />
+                    </right>
+                </BorderPane>
+            </children>
+            <BorderPane.margin>
+                <Insets bottom="10.0" left="10.0" right="10.0" />
+            </BorderPane.margin>
+        </GridPane>
+    </center>
+   <bottom>
+      <Button id="console" fx:id="console" mnemonicParsing="false" onAction="#printLists" text="console print" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
