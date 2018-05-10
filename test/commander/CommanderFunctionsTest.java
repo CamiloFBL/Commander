@@ -24,6 +24,24 @@ class CommanderFunctionsTest extends CommanderFunctions {
     }
 
     @Test
+    void TestCreateCommByKeyPress() {
+        System.out.println("Testing CreateCommKeyPress method");
+        CreateCommNamesByApps();
+        for(int i = 0; commNamesByApps.length > i; i++){
+            System.out.println(commNamesByApps[i]);
+        }
+    }
+
+    @Test
+    void TestCreateCommAppsPath() {
+        System.out.println("Testing CreateCommAppsPath method");
+        CreateCommAppsPath();
+        for(int i = 0; commAppsPath.length > i; i++){
+            System.out.println(commAppsPath[i]);
+        }
+    }
+
+    @Test
     void TestReadCommNamesByKeyPress() {
         System.out.println("Testing ReadCommNamesByKeyPress method");
         ReadCommNamesByKeyPress();
