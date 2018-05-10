@@ -116,9 +116,9 @@ public class SettingsController {
 //        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
         for(int i = 0; commListNamesByKeyPress.size() > i; i++){
             String check = commListNamesByKeyPress.get(i);
-            if(check.equals("*new*") || check.equals("")){
+            if(check.equalsIgnoreCase(("*new*")) || check.equalsIgnoreCase((""))){
                 System.out.println("commListNamesByKeyPress triggered an error...");
-                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*'.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*' (Ignoring case).");
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.show();
                 return;
@@ -126,9 +126,9 @@ public class SettingsController {
         }
         for(int i = 0; commListKeyPress.size() > i; i++){
             String check = commListKeyPress.get(i);
-            if(check.equals("*new*") || check.equals("")){
+            if(check.equalsIgnoreCase(("*new*")) || check.equalsIgnoreCase((""))){
                 System.out.println("commListKeyPress triggered an error...");
-                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*'.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*' (Ignoring case).");
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.show();
                 return;
@@ -136,9 +136,9 @@ public class SettingsController {
         }
         for(int i = 0; commListNamesByApps.size() > i; i++){
             String check = commListNamesByApps.get(i);
-            if(check.equals("*new*") || check.equals("")){
+            if(check.equalsIgnoreCase(("*new*")) || check.equalsIgnoreCase((""))){
                 System.out.println("commListNamesByApps triggered an error...");
-                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*'.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*' (Ignoring case).");
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.show();
                 return;
@@ -146,9 +146,9 @@ public class SettingsController {
         }
         for(int i = 0; commListAppsPath.size() > i; i++){
             String check = commListAppsPath.get(i);
-            if(check.equals("*new*") || check.equals("")){
+            if(check.equalsIgnoreCase(("*new*")) || check.equalsIgnoreCase((""))){
                 System.out.println("commListAppsPath triggered an error...");
-                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*'.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "One of the fields are empty or not changed.\nMake sure that no field are empty or filled by '*new*' (Ignoring case).");
                 alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                 alert.show();
                 return;
@@ -164,8 +164,8 @@ public class SettingsController {
         commByKeyPress = new String[commListKeyPress.size()];
 
         for(int i = 0; commListNamesByKeyPress.size() > i; i++){
-            CommanderFunctions.commNamesByKeyPress[i] = commListNamesByKeyPress.get(i);
-            CommanderFunctions.commKeyPress[i] = commListKeyPress.get(i);
+            CommanderFunctions.commNamesByKeyPress[i] = commListNamesByKeyPress.get(i).toLowerCase();
+            CommanderFunctions.commKeyPress[i] = commListKeyPress.get(i).toLowerCase();
         }
 
         System.out.println(Arrays.toString(CommanderFunctions.commNamesByKeyPress));
@@ -175,18 +175,86 @@ public class SettingsController {
         commAppsPath = new String[commListAppsPath.size()];
 
         for(int i = 0; commListNamesByApps.size() > i; i++){
-            CommanderFunctions.commNamesByApps[i] = commListNamesByApps.get(i);
-            CommanderFunctions.commAppsPath[i] = commListAppsPath.get(i);
+            CommanderFunctions.commNamesByApps[i] = commListNamesByApps.get(i).toLowerCase();
+            CommanderFunctions.commAppsPath[i] = commListAppsPath.get(i).toLowerCase();
         }
 
         System.out.println(Arrays.toString(CommanderFunctions.commNamesByApps));
         System.out.println(Arrays.toString(CommanderFunctions.commAppsPath));
 
         SaveCommFiles();
-        System.out.println("Files update completed.");
     }
 
     private void SaveCommFiles() throws IOException{
+        for(int i = 0; commListNamesByKeyPress.size() > i; i++){
+            if(commListNamesByKeyPress.size() > i + 1){
+                System.out.println(i);
+                for (int j = i + 1; commListNamesByKeyPress.size() > j; j++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByKeyPress.get(j));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByKeyPress.get(j))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.show();
+                        return;
+                    }
+                }
+                for(int k = 0; commListNamesByApps.size() > k; k++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByApps.get(k));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByApps.get(k))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.show();
+                        return;
+                    }
+                }
+            }
+            else{
+                System.out.println(i);
+                for(int k = 0; commListNamesByApps.size() > k; k++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByApps.get(k));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByApps.get(k))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.show();
+                        return;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; commListNamesByApps.size() > i; i++){
+            System.out.println("new : " + i);
+            for(int j = i + 1; commListNamesByApps.size() > j; j++){
+                System.out.print(commListNamesByApps.get(i) + " - " + commListNamesByApps.get(j));
+                if(!commListNamesByApps.get(i).equalsIgnoreCase(commListNamesByApps.get(j))){
+                    System.out.println(" : Accept");
+                }
+                else{
+                    System.out.println(" : False");
+                    System.out.println("Found repeated entry. Canceling method.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.show();
+                    return;
+                }
+            }
+        }
+
         PrintWriter pw1 = new PrintWriter("CommNamesByKeyPress.txt");
         PrintWriter pw2 = new PrintWriter("CommKeyPress.txt");
         PrintWriter pw3 = new PrintWriter("CommNamesByApps.txt");
@@ -194,31 +262,33 @@ public class SettingsController {
 
         for(int i = 0; CommanderFunctions.commNamesByKeyPress.length > i; i++){
             System.out.println(CommanderFunctions.commNamesByKeyPress[i]);
-            pw1.println(CommanderFunctions.commNamesByKeyPress[i]);
+            pw1.println(CommanderFunctions.commNamesByKeyPress[i].toLowerCase());
         }
         pw1.close();
         System.out.println("CommNamesByKeyPress file saved.");
 
         for(int i = 0; CommanderFunctions.commKeyPress.length > i; i++){
             System.out.println(CommanderFunctions.commKeyPress[i]);
-            pw2.println(CommanderFunctions.commKeyPress[i]);
+            pw2.println(CommanderFunctions.commKeyPress[i].toLowerCase());
         }
         pw2.close();
         System.out.println("CommKeyPress file saved.");
 
         for(int i = 0; CommanderFunctions.commNamesByApps.length > i; i++){
             System.out.println(CommanderFunctions.commNamesByApps[i]);
-            pw3.println(CommanderFunctions.commNamesByApps[i]);
+            pw3.println(CommanderFunctions.commNamesByApps[i].toLowerCase());
         }
         pw3.close();
         System.out.println("CommNamesByApps file saved.");
 
         for(int i = 0; CommanderFunctions.commAppsPath.length > i; i++){
             System.out.println(CommanderFunctions.commAppsPath[i]);
-            pw4.println(CommanderFunctions.commAppsPath[i]);
+            pw4.println(CommanderFunctions.commAppsPath[i].toLowerCase());
         }
         pw4.close();
         System.out.println("CommAppsPath file saved.");
+
+        System.out.println("Files update completed.");
     }
 
     @FXML
@@ -310,5 +380,62 @@ public class SettingsController {
         System.out.println(ListCommKeyPress.getSelectionModel().getSelectedIndex());
         System.out.println(ListCommNamesByApps.getSelectionModel().getSelectedIndex());
         System.out.println(ListCommAppsPath.getSelectionModel().getSelectedIndex());
+
+        for(int i = 0; commListNamesByKeyPress.size() > i; i++){
+            if(commListNamesByKeyPress.size() > i + 1){
+                System.out.println(i);
+                for (int j = i + 1; commListNamesByKeyPress.size() > j; j++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByKeyPress.get(j));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByKeyPress.get(j))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        return;
+                    }
+                }
+                for(int k = 0; commListNamesByApps.size() > k; k++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByApps.get(k));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByApps.get(k))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        return;
+                    }
+                }
+            }
+            else{
+                System.out.println(i);
+                for(int k = 0; commListNamesByApps.size() > k; k++){
+                    System.out.print(commListNamesByKeyPress.get(i) + " - " + commListNamesByApps.get(k));
+                    if(!commListNamesByKeyPress.get(i).equalsIgnoreCase(commListNamesByApps.get(k))){
+                        System.out.println(" : Accept");
+                    }
+                    else{
+                        System.out.println(" : False");
+                        System.out.println("Found repeated entry. Canceling method.");
+                        return;
+                    }
+                }
+            }
+        }
+
+        for(int i = 0; commListNamesByApps.size() > i; i++){
+            System.out.println("new : " + i);
+            for(int j = i + 1; commListNamesByApps.size() > j; j++){
+                System.out.print(commListNamesByApps.get(i) + " - " + commListNamesByApps.get(j));
+                if(!commListNamesByApps.get(i).equalsIgnoreCase(commListNamesByApps.get(j))){
+                    System.out.println(" : Accept");
+                }
+                else{
+                    System.out.println(" : False");
+                    System.out.println("Found repeated entry. Canceling method.");
+                    return;
+                }
+            }
+        }
     }
 }
