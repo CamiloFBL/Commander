@@ -65,9 +65,9 @@ public class MainController {
         String commName = command.substring(CommanderFunctions.commInit.length(), command.length());
 
         if(commSymbolCheck.equals(CommanderFunctions.commInit)){
-            if(CommanderFunctions.CommandCheck(commName)) {
+            if(CommanderFunctions.CommandCheck(commName.toLowerCase())) {
                 try {
-                    CommanderFunctions.ExecuteCommand(commName);
+                    CommanderFunctions.ExecuteCommand(commName.toLowerCase());
                     log.appendText("Command executed.\n");
                 } catch (Exception e) {
                     e.printStackTrace();
