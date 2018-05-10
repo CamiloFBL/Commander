@@ -7,10 +7,11 @@ This application aims to execute certain system actions (tested for only Windows
 These are the currently supported actions:
  - Keyboard keypress.
  - Commands and application settings reading on external files.
-
-Planned actions:
+ - Commands customization.
  - Applications execution.
 
+Planned actions:
+*Currently thinking on new ideas*
+
 Planned features:
- - Commands customization.
  - Remote access for commands execution.
