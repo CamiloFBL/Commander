@@ -3,9 +3,7 @@ package commander;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Properties;
 
@@ -114,6 +112,17 @@ public class SettingsController {
 //        CommanderFunctions.commKeyPress = new String[commListKeyPress.size()];
 //        CommanderFunctions.commNamesByApps = new String[commListNamesByApps.size()];
 //        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
+        String commInit = commInitField.getText();
+
+        if(commInit.isEmpty()){
+            System.out.println("commInitField triggered an error...");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "CommInit symbol cannot be empty.");
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.show();
+            commInitField.setText(CommanderFunctions.commInit);
+            return;
+        }
+
         for(int i = 0; commListNamesByKeyPress.size() > i; i++){
             String check = commListNamesByKeyPress.get(i);
             if(check.equalsIgnoreCase(("*new*")) || check.equalsIgnoreCase((""))){
@@ -186,6 +195,18 @@ public class SettingsController {
     }
 
     private void SaveCommFiles() throws IOException{
+        String path = "./commander.properties";
+        FileInputStream fi = new FileInputStream(path);
+        Properties prop = new Properties();
+        prop.load(fi);
+        fi.close();
+
+        String commInit = commInitField.getText();
+        FileOutputStream fo = new FileOutputStream(path);
+        prop.setProperty("CommInit", commInit);
+        prop.store(fo, null);
+        fo.close();
+
         for(int i = 0; commListNamesByKeyPress.size() > i; i++){
             if(commListNamesByKeyPress.size() > i + 1){
                 System.out.println(i);
