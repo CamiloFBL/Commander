@@ -206,7 +206,7 @@ public class CommanderFunctions {
     }
 
     public static void CreateCommNamesByApps() {
-        String[] commNames = new String[]{"null"};
+        String[] commNames = new String[]{"notepad", "calculator"};
         File file = new File("CommNamesByApps.txt");
         commNamesByApps = new String[commNames.length];
         try {
@@ -259,7 +259,7 @@ public class CommanderFunctions {
     }
 
     public static void CreateCommAppsPath(){
-        String[] commPaths = new String[]{"null"};
+        String[] commPaths = new String[]{"notepad", "calc"};
         File file = new File("CommAppsPath.txt");
         commAppsPath = new String[commPaths.length];
         try {
