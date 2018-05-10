@@ -218,9 +218,11 @@ public class SettingsController {
                     else{
                         System.out.println(" : False");
                         System.out.println("Found repeated entry. Canceling method.");
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify selected item and try again.");
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.show();
+                        ListCommNamesByKeyPress.getSelectionModel().selectIndices(i);
+                        ListCommKeyPress.getSelectionModel().selectIndices(i);
                         return;
                     }
                 }
@@ -232,9 +234,11 @@ public class SettingsController {
                     else{
                         System.out.println(" : False");
                         System.out.println("Found repeated entry. Canceling method.");
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify selected item and try again.");
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.show();
+                        ListCommNamesByKeyPress.getSelectionModel().selectIndices(i);
+                        ListCommKeyPress.getSelectionModel().selectIndices(i);
                         return;
                     }
                 }
@@ -249,9 +253,11 @@ public class SettingsController {
                     else{
                         System.out.println(" : False");
                         System.out.println("Found repeated entry. Canceling method.");
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify selected item and try again.");
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.show();
+                        ListCommNamesByKeyPress.getSelectionModel().selectIndices(i);
+                        ListCommKeyPress.getSelectionModel().selectIndices(i);
                         return;
                     }
                 }
@@ -268,9 +274,11 @@ public class SettingsController {
                 else{
                     System.out.println(" : False");
                     System.out.println("Found repeated entry. Canceling method.");
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify and try again.");
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Found two commands with the same name (ignoring case.\nPlease verify selected item and try again.");
                     alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                     alert.show();
+                    ListCommNamesByApps.getSelectionModel().selectIndices(i);
+                    ListCommAppsPath.getSelectionModel().selectIndices(i);
                     return;
                 }
             }
