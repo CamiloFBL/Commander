@@ -114,6 +114,7 @@ public class SettingsController {
 //        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
         String commInit = commInitField.getText();
 
+        /*Validations start*/
         if(commInit.isEmpty()){
             System.out.println("commInitField triggered an error...");
             Alert alert = new Alert(Alert.AlertType.ERROR, "CommInit symbol cannot be empty.");
@@ -142,6 +143,18 @@ public class SettingsController {
                 alert.show();
                 return;
             }
+            if(CommanderRobot.KeysCheck(check)){
+                System.out.println("Keys entered correctly");
+            }
+            else{
+                System.out.println("At least one unrecognized key found.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Found an unsupported key press. Please verify highlighted command instruction.");
+                alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                ListCommNamesByKeyPress.getSelectionModel().selectIndices(i);
+                ListCommKeyPress.getSelectionModel().selectIndices(i);
+                alert.show();
+                return;
+            }
         }
         for(int i = 0; commListNamesByApps.size() > i; i++){
             String check = commListNamesByApps.get(i);
@@ -163,6 +176,7 @@ public class SettingsController {
                 return;
             }
         }
+        /*Validations end*/
 
         CommanderFunctions.commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
         CommanderFunctions.commKeyPress = new String[commListKeyPress.size()];
@@ -318,6 +332,10 @@ public class SettingsController {
         System.out.println("CommAppsPath file saved.");
 
         System.out.println("Files update completed.");
+
+        Alert completed = new Alert(Alert.AlertType.CONFIRMATION, "Commands save successful.");
+        completed.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+        completed.show();
     }
 
     @FXML

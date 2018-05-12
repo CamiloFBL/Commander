@@ -422,63 +422,14 @@ public class CommanderFunctions {
             KeyPresses = commKeyPress[index].split("\\+");
             for(int i = 0; KeyPresses.length > i; i++){
                 System.out.println(KeyPresses[i]);
-                RobotKeyPresses(KeyPresses[i]);
+                CommanderRobot.RobotKeyPresses(KeyPresses[i]);
             }
             for(int i = 0; KeyPresses.length > i; i++){
-                RobotKeyReleases(KeyPresses[i]);
+                CommanderRobot.RobotKeyReleases(KeyPresses[i]);
             }
         }
         if(Arrays.asList(commNamesByApps).contains(command)){
-            RobotExecApp(command);
+            CommanderRobot.RobotExecApp(command);
         }
     }
-
-    private static void RobotKeyPresses(String KeyPress){
-        try{
-            Robot robot = new Robot();
-            if(KeyPress.equals("windows"))
-                robot.keyPress(KeyEvent.VK_WINDOWS);
-            if(KeyPress.equals("ctrl"))
-                robot.keyPress((KeyEvent.VK_CONTROL));
-            if(KeyPress.equals("shift"))
-                robot.keyPress((KeyEvent.VK_SHIFT));
-            if(KeyPress.equals("esc"))
-                robot.keyPress((KeyEvent.VK_ESCAPE));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private static void RobotKeyReleases(String KeyPress){
-        try{
-            Robot robot = new Robot();
-            if(KeyPress.equals("windows"))
-                robot.keyRelease(KeyEvent.VK_WINDOWS);
-            if(KeyPress.equals("ctrl"))
-                robot.keyRelease((KeyEvent.VK_CONTROL));
-            if(KeyPress.equals("shift"))
-                robot.keyRelease((KeyEvent.VK_SHIFT));
-            if(KeyPress.equals("esc"))
-                robot.keyRelease((KeyEvent.VK_ESCAPE));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private static void RobotExecApp(String AppExec){
-        int commIndex = Arrays.asList(commNamesByApps).indexOf(AppExec);
-        String AppPath = commAppsPath[commIndex];
-
-        Runtime rs = Runtime.getRuntime();
-
-        try{
-            rs.exec(AppPath);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
 }
