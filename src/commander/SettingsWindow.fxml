@@ -68,6 +68,7 @@
                 <ListView id="ListCommAppsPath" fx:id="ListCommAppsPath" editable="true" onMouseClicked="#SelectAppPair" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                 <Button id="addKeyPress" fx:id="addKeyPress" mnemonicParsing="false" onAction="#AddNewKeyComm" text="Add" GridPane.rowIndex="4" />
                 <Button id="deleteKeyPress" fx:id="deleteKeyPress" mnemonicParsing="false" onAction="#DeleteKeyComm" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button id="help" fx:id="help" mnemonicParsing="false" onAction="#OpenButtonsHelp" text="Help" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                 <Button id="addApp" fx:id="addApp" mnemonicParsing="false" onAction="#AddNewAppComm" text="Add" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 <Button id="deleteApp" fx:id="deleteApp" mnemonicParsing="false" onAction="#DeleteAppComm" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
                 <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="6">
@@ -81,13 +82,11 @@
                         <Button fx:id="close" mnemonicParsing="false" onAction="#StageClose" text="Close" BorderPane.alignment="CENTER" />
                     </right>
                 </BorderPane>
+            <Button id="console" fx:id="console" mnemonicParsing="false" onAction="#printLists" text="console print" GridPane.columnSpan="5" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="10.0" left="10.0" right="10.0" />
             </BorderPane.margin>
         </GridPane>
     </center>
-   <bottom>
-      <Button id="console" fx:id="console" mnemonicParsing="false" onAction="#printLists" text="console print" BorderPane.alignment="CENTER" />
-   </bottom>
 </BorderPane>

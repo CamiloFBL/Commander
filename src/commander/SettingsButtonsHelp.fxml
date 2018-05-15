@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane prefHeight="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="commander.SettingsButtonsHelpController">
+   <top>
+      <Label text="Allowed buttons list." BorderPane.alignment="CENTER_LEFT" />
+   </top>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ListView id="btnName" fx:id="btnNameList" onKeyPressed="#CtrlCListener" onMouseClicked="#SelectKeyNamePair" prefWidth="100.0" GridPane.rowIndex="1" />
+            <ListView id="btnDescList" fx:id="btnDescList" onKeyPressed="#CtrlCListener" onMouseClicked="#SelectKeyNameDescPair" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Button Name" />
+            <Label text="Description" GridPane.columnIndex="1" />
+            <Label text="Press CTR+C on selected item to copy button name." GridPane.columnSpan="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

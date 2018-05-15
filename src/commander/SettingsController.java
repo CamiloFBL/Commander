@@ -7,10 +7,10 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Properties;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -64,22 +64,27 @@ public class SettingsController {
 
     private void FillLists(){
         System.out.println("Filling ListViews...");
+
         for(int i = 0; CommanderFunctions.commNamesByKeyPress.length > i; i++){
             System.out.println(CommanderFunctions.commNamesByKeyPress[i]);
             ListCommNamesByKeyPress.getItems().add(CommanderFunctions.commNamesByKeyPress[i]);
         }
+
         for(int i = 0; CommanderFunctions.commKeyPress.length > i; i++){
             System.out.println(CommanderFunctions.commKeyPress[i]);
             ListCommKeyPress.getItems().add(CommanderFunctions.commKeyPress[i]);
         }
+
         for(int i = 0; CommanderFunctions.commNamesByApps.length > i; i++){
         System.out.println(CommanderFunctions.commNamesByApps[i]);
         ListCommNamesByApps.getItems().add(CommanderFunctions.commNamesByApps[i]);
-    }
+        }
+
         for(int i = 0; CommanderFunctions.commAppsPath.length > i; i++){
         System.out.println(CommanderFunctions.commAppsPath[i]);
         ListCommAppsPath.getItems().add(CommanderFunctions.commAppsPath[i]);
-    }
+        }
+
         ListCommNamesByKeyPress.setCellFactory(TextFieldListCell.forListView());
         ListCommKeyPress.setCellFactory(TextFieldListCell.forListView());
         ListCommNamesByApps.setCellFactory(TextFieldListCell.forListView());
@@ -484,5 +489,15 @@ public class SettingsController {
                 }
             }
         }
+    }
+
+    @FXML
+    private void OpenButtonsHelp() throws IOException {
+        Parent root2 = FXMLLoader.load(getClass().getResource("SettingsButtonsHelp.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Buttons List");
+        stage.setScene(new Scene(root2, 600, 400));
+        stage.setMinWidth(300);
+        stage.show();
     }
 }
