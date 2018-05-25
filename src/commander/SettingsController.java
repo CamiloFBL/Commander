@@ -1,5 +1,7 @@
 package commander;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
@@ -93,6 +95,34 @@ public class SettingsController {
         commListKeyPress = ListCommKeyPress.getItems();
         commListNamesByApps = ListCommNamesByApps.getItems();
         commListAppsPath = ListCommAppsPath.getItems();
+        ListCommNamesByKeyPress.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(ListCommNamesByKeyPress.getSelectionModel().getSelectedIndex());
+                ListCommKeyPress.getSelectionModel().selectIndices(ListCommNamesByKeyPress.getSelectionModel().getSelectedIndex());
+            }
+        });
+        ListCommKeyPress.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(ListCommKeyPress.getSelectionModel().getSelectedIndex());
+                ListCommNamesByKeyPress.getSelectionModel().selectIndices(ListCommKeyPress.getSelectionModel().getSelectedIndex());
+            }
+        });
+        ListCommNamesByApps.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(ListCommNamesByApps.getSelectionModel().getSelectedIndex());
+                ListCommAppsPath.getSelectionModel().selectIndices(ListCommNamesByApps.getSelectionModel().getSelectedIndex());
+            }
+        });
+        ListCommAppsPath.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(ListCommAppsPath.getSelectionModel().getSelectedIndex());
+                ListCommNamesByApps.getSelectionModel().selectIndices(ListCommAppsPath.getSelectionModel().getSelectedIndex());
+            }
+        });
 }
 
     @FXML
@@ -347,20 +377,6 @@ public class SettingsController {
     private void StageClose(){
         Stage st = (Stage) close.getScene().getWindow();
         st.close();
-    }
-
-    @FXML
-    private void SelectKeyNameCommPair(){
-        if(ListCommNamesByKeyPress.getSelectionModel().getSelectedIndex() > -1){
-            ListCommKeyPress.getSelectionModel().selectIndices(ListCommNamesByKeyPress.getSelectionModel().getSelectedIndex());
-        }
-    }
-
-    @FXML
-    private void SelectKeyCommPair(){
-        if(ListCommKeyPress.getSelectionModel().getSelectedIndex() > -1){
-            ListCommNamesByKeyPress.getSelectionModel().selectIndices(ListCommKeyPress.getSelectionModel().getSelectedIndex());
-        }
     }
 
     @FXML

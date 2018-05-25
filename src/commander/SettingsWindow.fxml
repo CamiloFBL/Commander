@@ -56,16 +56,16 @@
                </GridPane.margin></Label>
             <Label text="Command Names" GridPane.rowIndex="2" />
             <Label text="Key Presses" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                <ListView id="ListCommNamesByKeyPress" fx:id="ListCommNamesByKeyPress" editable="true" onMouseClicked="#SelectKeyNameCommPair" prefWidth="200.0" GridPane.rowIndex="3" />
-                <ListView id="ListCommKeyPress" fx:id="ListCommKeyPress" editable="true" onMouseClicked="#SelectKeyCommPair" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ListView id="ListCommNamesByKeyPress" fx:id="ListCommNamesByKeyPress" editable="true" prefWidth="200.0" GridPane.rowIndex="3" />
+                <ListView id="ListCommKeyPress" fx:id="ListCommKeyPress" editable="true" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="Commands to open apps:" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></Label>
             <Label text="Command Name" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <Label text="App path or command" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                <ListView id="ListCommNamesByApps" fx:id="ListCommNamesByApps" editable="true" onMouseClicked="#SelectAppNamePair" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <ListView id="ListCommAppsPath" fx:id="ListCommAppsPath" editable="true" onMouseClicked="#SelectAppPair" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                <ListView id="ListCommNamesByApps" fx:id="ListCommNamesByApps" editable="true" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <ListView id="ListCommAppsPath" fx:id="ListCommAppsPath" editable="true" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                 <Button id="addKeyPress" fx:id="addKeyPress" mnemonicParsing="false" onAction="#AddNewKeyComm" text="Add" GridPane.rowIndex="4" />
                 <Button id="deleteKeyPress" fx:id="deleteKeyPress" mnemonicParsing="false" onAction="#DeleteKeyComm" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button id="help" fx:id="help" mnemonicParsing="false" onAction="#OpenButtonsHelp" text="Help" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
