@@ -1,6 +1,8 @@
 package commander;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,20 +42,20 @@ public class SettingsButtonsHelpController {
                 }
             }
         });
-    }
-
-    @FXML
-    private void SelectKeyNamePair(){
-        if(btnNameList.getSelectionModel().getSelectedIndex() > -1){
-            btnDescList.getSelectionModel().selectIndices(btnNameList.getSelectionModel().getSelectedIndex());
-        }
-    }
-
-    @FXML
-    private void SelectKeyNameDescPair(){
-        if(btnDescList.getSelectionModel().getSelectedIndex() > -1){
-            btnNameList.getSelectionModel().selectIndices(btnDescList.getSelectionModel().getSelectedIndex());
-        }
+        btnNameList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(btnNameList.getSelectionModel().getSelectedIndex());
+                btnDescList.getSelectionModel().selectIndices(btnNameList.getSelectionModel().getSelectedIndex());
+            }
+        });
+        btnDescList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println(btnDescList.getSelectionModel().getSelectedIndex());
+                btnNameList.getSelectionModel().selectIndices(btnDescList.getSelectionModel().getSelectedIndex());
+            }
+        });
     }
 
     @FXML

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -9,7 +10,7 @@
 
 <BorderPane prefHeight="400.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="commander.SettingsButtonsHelpController">
    <top>
-      <Label text="Allowed buttons list." BorderPane.alignment="CENTER_LEFT" />
+      <Label text="Allowed buttons list.&#10;For multiple button press, place a '+' character between key names." BorderPane.alignment="CENTER_LEFT" />
    </top>
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -23,12 +24,27 @@
             <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ListView id="btnName" fx:id="btnNameList" onKeyPressed="#CtrlCListener" onMouseClicked="#SelectKeyNamePair" prefWidth="100.0" GridPane.rowIndex="1" />
-            <ListView id="btnDescList" fx:id="btnDescList" onKeyPressed="#CtrlCListener" onMouseClicked="#SelectKeyNameDescPair" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Button Name" />
-            <Label text="Description" GridPane.columnIndex="1" />
+            <ListView id="btnName" fx:id="btnNameList" onKeyPressed="#CtrlCListener" prefWidth="100.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></ListView>
+            <ListView id="btnDescList" fx:id="btnDescList" onKeyPressed="#CtrlCListener" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Button Name">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="10.0" />
+               </padding></Label>
+            <Label text="Description" GridPane.columnIndex="1">
+               <padding>
+                  <Insets top="10.0" />
+               </padding></Label>
             <Label text="Press CTR+C on selected item to copy button name." GridPane.columnSpan="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>
+   <padding>
+      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+   </padding>
 </BorderPane>

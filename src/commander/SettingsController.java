@@ -485,7 +485,7 @@ public class SettingsController {
         Parent root2 = FXMLLoader.load(getClass().getResource("SettingsButtonsHelp.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Buttons List");
-        stage.setScene(new Scene(root2, 600, 400));
+        stage.setScene(new Scene(root2, 400, 400));
         stage.setMinWidth(300);
         stage.show();
     }
