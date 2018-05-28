@@ -132,21 +132,7 @@ public class SettingsController {
         String[] commByKeyPress;
         String[] commNamesByApp;
         String[] commAppsPath;
-        //something
-//        commListNamesByKeyPress;
-//        commListKeyPress;
-//        commListNamesByApps;
-//        commListAppsPath;
-//        commListNamesByKeyPress.forEach(text -> {
-//            String listTextTest = text;
-//            System.out.println("printing on customized loop: " + listTextTest);
-//        });
-//        System.out.println(commListNamesByKeyPress.size());
-//        System.out.println(commListNamesByKeyPress.get(0));
-//        CommanderFunctions.commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
-//        CommanderFunctions.commKeyPress = new String[commListKeyPress.size()];
-//        CommanderFunctions.commNamesByApps = new String[commListNamesByApps.size()];
-//        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
+
         String commInit = commInitField.getText();
 
         /*Validations start*/
@@ -211,50 +197,6 @@ public class SettingsController {
                 return;
             }
         }
-        /*Validations end*/
-
-        CommanderFunctions.commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
-        CommanderFunctions.commKeyPress = new String[commListKeyPress.size()];
-        CommanderFunctions.commNamesByApps = new String[commListNamesByApps.size()];
-        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
-
-        commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
-        commByKeyPress = new String[commListKeyPress.size()];
-
-        for(int i = 0; commListNamesByKeyPress.size() > i; i++){
-            CommanderFunctions.commNamesByKeyPress[i] = commListNamesByKeyPress.get(i).toLowerCase();
-            CommanderFunctions.commKeyPress[i] = commListKeyPress.get(i).toLowerCase();
-        }
-
-        System.out.println(Arrays.toString(CommanderFunctions.commNamesByKeyPress));
-        System.out.println(Arrays.toString(CommanderFunctions.commKeyPress));
-
-        commNamesByApp = new String[commListNamesByApps.size()];
-        commAppsPath = new String[commListAppsPath.size()];
-
-        for(int i = 0; commListNamesByApps.size() > i; i++){
-            CommanderFunctions.commNamesByApps[i] = commListNamesByApps.get(i).toLowerCase();
-            CommanderFunctions.commAppsPath[i] = commListAppsPath.get(i).toLowerCase();
-        }
-
-        System.out.println(Arrays.toString(CommanderFunctions.commNamesByApps));
-        System.out.println(Arrays.toString(CommanderFunctions.commAppsPath));
-
-        SaveCommFiles();
-    }
-
-    private void SaveCommFiles() throws IOException{
-        String path = "./commander.properties";
-        FileInputStream fi = new FileInputStream(path);
-        Properties prop = new Properties();
-        prop.load(fi);
-        fi.close();
-
-        String commInit = commInitField.getText();
-        FileOutputStream fo = new FileOutputStream(path);
-        prop.setProperty("CommInit", commInit);
-        prop.store(fo, null);
-        fo.close();
 
         for(int i = 0; commListNamesByKeyPress.size() > i; i++){
             if(commListNamesByKeyPress.size() > i + 1){
@@ -332,6 +274,51 @@ public class SettingsController {
                 }
             }
         }
+        /*Validations end*/
+
+        CommanderFunctions.commInit = commInit;
+        CommanderFunctions.commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
+        CommanderFunctions.commKeyPress = new String[commListKeyPress.size()];
+        CommanderFunctions.commNamesByApps = new String[commListNamesByApps.size()];
+        CommanderFunctions.commAppsPath = new String[commListAppsPath.size()];
+
+        commNamesByKeyPress = new String[commListNamesByKeyPress.size()];
+        commByKeyPress = new String[commListKeyPress.size()];
+
+        for(int i = 0; commListNamesByKeyPress.size() > i; i++){
+            CommanderFunctions.commNamesByKeyPress[i] = commListNamesByKeyPress.get(i).toLowerCase();
+            CommanderFunctions.commKeyPress[i] = commListKeyPress.get(i).toLowerCase();
+        }
+
+        System.out.println(Arrays.toString(CommanderFunctions.commNamesByKeyPress));
+        System.out.println(Arrays.toString(CommanderFunctions.commKeyPress));
+
+        commNamesByApp = new String[commListNamesByApps.size()];
+        commAppsPath = new String[commListAppsPath.size()];
+
+        for(int i = 0; commListNamesByApps.size() > i; i++){
+            CommanderFunctions.commNamesByApps[i] = commListNamesByApps.get(i).toLowerCase();
+            CommanderFunctions.commAppsPath[i] = commListAppsPath.get(i).toLowerCase();
+        }
+
+        System.out.println(Arrays.toString(CommanderFunctions.commNamesByApps));
+        System.out.println(Arrays.toString(CommanderFunctions.commAppsPath));
+
+        SaveCommFiles();
+    }
+
+    private void SaveCommFiles() throws IOException{
+        String path = "./commander.properties";
+        FileInputStream fi = new FileInputStream(path);
+        Properties prop = new Properties();
+        prop.load(fi);
+        fi.close();
+
+        String commInit = commInitField.getText();
+        FileOutputStream fo = new FileOutputStream(path);
+        prop.setProperty("CommInit", commInit);
+        prop.store(fo, null);
+        fo.close();
 
         PrintWriter pw1 = new PrintWriter("CommNamesByKeyPress.txt");
         PrintWriter pw2 = new PrintWriter("CommKeyPress.txt");
@@ -377,20 +364,6 @@ public class SettingsController {
     private void StageClose(){
         Stage st = (Stage) close.getScene().getWindow();
         st.close();
-    }
-
-    @FXML
-    private void SelectAppNamePair(){
-        if(ListCommNamesByApps.getSelectionModel().getSelectedIndex() > -1){
-            ListCommAppsPath.getSelectionModel().selectIndices(ListCommNamesByApps.getSelectionModel().getSelectedIndex());
-        }
-    }
-
-    @FXML
-    private void SelectAppPair(){
-        if(ListCommAppsPath.getSelectionModel().getSelectedIndex() > -1){
-            ListCommNamesByApps.getSelectionModel().selectIndices(ListCommAppsPath.getSelectionModel().getSelectedIndex());
-        }
     }
 
     @FXML
